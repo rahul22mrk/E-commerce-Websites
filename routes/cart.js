@@ -11,7 +11,7 @@ router.get('/user/:userId/cart', isLoggedIn, async(req, res) => {
         const user = await User.findById(req.params.userId).populate('cart');
         res.render('cart/showCart', { userCart: user.cart });
     } catch (e) {
-        req.flash('error', 'Unable to Add this product');
+        req.flash('error', 'Geeting error Unable to Add this product');
         res.render('error');
     }
 })
@@ -28,7 +28,7 @@ router.post('/user/:id/cart', isLoggedIn, async(req, res) => {
         user.cart.push(product);
 
         await user.save();
-        req.flash('success', 'Added to cart successfully')
+        req.flash('success', 'Successfully Added the product')
         res.redirect(`/user/${req.user._id}/cart`);
     } catch (e) {
         req.flash('error', 'Unable to get the cart at this moment');
